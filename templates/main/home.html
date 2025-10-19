@@ -1,28 +1,27 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Home - Project Management Tool</title>
-    <style>
-        body { font-family: sans-serif; text-align: center; margin-top: 80px; }
-        a.button {
-            display: inline-block;
-            padding: 15px 30px;
-            margin: 15px;
-            background-color: #007bff;
-            color: white;
-            text-decoration: none;
-            border-radius: 10px;
-        }
-        a.button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    <title>Project Management Tool</title>
 </head>
 <body>
-    <h1>Welcome to Project Management Tool</h1>
-
-    <a href="/projects/" class="button">Projects</a>
-    <a href="/users/" class="button">Users</a>
-    <a href="/apps/tasks/" class="button">Tasks</a>
+<h1>Welcome to Project Management Tool</h1>
+<nav>
+    <ul>
+        <li><a href="{% url 'users:users_list' %}">Users</a></li>
+        <li><a href="{% url 'projects:projects_list' %}">Projects</a></li>
+        <li><a href="{% url 'tasks:tasks_list' %}">Tasks</a></li>
+    </ul>
+    {% if not request.user.is_authenticated %}
+        <a href="{% url 'users:register' %}">Register</a> |
+        <a href="{% url 'users:login' %}">Login</a>
+    {% else %}
+        <p>Hello, {{ request.user.username }}!</p>
+        <form action="{% url 'users:logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>
+    {% endif %}
+</nav>
 </body>
 </html>

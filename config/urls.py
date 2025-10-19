@@ -22,5 +22,6 @@ urlpatterns = [
     path('projects/', include('apps.projects.urls')),
     path('users/', include('apps.users.urls')),
     path('teams/', include('apps.teams.urls')),
+    path('tasks/', include('apps.tasks.urls')),
     path('', include('apps.main.urls')),
 ]
